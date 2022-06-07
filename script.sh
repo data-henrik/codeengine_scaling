@@ -10,8 +10,13 @@ if [ "$CE_DATA" ]; then
     done
 fi
 
-# IBM Cloud login and data upload to COS
+# IBM Cloud login to target resource group and region
+# The API key is taken from the environment
 ibmcloud login  -g ${IC_RESOURCE_GROUP} -r ${IC_REGION}
+
+# Select the Code Engine project
 ibmcloud ce project select --name ${CE_PROJECT}
+
+# Update the app by seting min-scale to the new value
 ibmcloud ce app update --name ${CE_APP} --min-scale ${CE_MIN_SCALE}
 exit 0
